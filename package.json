@@ -1,0 +1,19 @@
+{
+  "name": "backend-learnings",
+  "version": "1.0.0",
+  "description": "To facilitate my learning of Backend languages and practices",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maximilian118/Backend-Learnings.git"
+  },
+  "author": "Maximilian Crosby",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Maximilian118/Backend-Learnings/issues"
+  },
+  "homepage": "https://github.com/Maximilian118/Backend-Learnings#readme"
+}
