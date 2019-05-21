@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/Maximilian118/Backend-Learnings/issues"
   },
-  "homepage": "https://github.com/Maximilian118/Backend-Learnings#readme"
+  "homepage": "https://github.com/Maximilian118/Backend-Learnings#readme",
+  "dependencies": {
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.0"
+  }
 }
