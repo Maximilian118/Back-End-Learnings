@@ -1,0 +1,35 @@
+html, body {
+  font-family: 'Cute Font', cursive;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: grid;
+  grid-template-rows: 10vh 85vh 5vh;
+  grid-template-columns: 100vw;
+  grid-template-areas:
+  "header"
+  "main"
+  "footer";
+
+  header, main, footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  header {
+    grid-area: header;
+    background: #52b3d9;
+  }
+
+  main {
+    grid-area: main;
+  }
+
+  footer {
+    grid-area: footer;
+    background: #3498db;
+  }
+}
