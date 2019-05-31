@@ -4,10 +4,11 @@
   "description": "To facilitate my learning of Backend languages and practices",
   "main": "index.js",
   "scripts": {
-    "start": "node website",
-    "dev": "nodemon ./node/server",
-    "bundler": "parcel ./node/src/index.html",
-    "twitbot": "node ./node/twitter-bot/twitter-bot"
+    "node-server": "nodemon ./node/src-node/js/index",
+    "express-server": "nodemon ./node/express/src-express/js/index",
+    "bundler": "parcel ./node/src-node/index.html",
+    "twitbot": "node ./node/twitter-bot/twitter-bot",
+    "twitbotstream": "node ./node/twitter-bot/twitter-bot-stream"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,9 @@
   },
   "homepage": "https://github.com/Maximilian118/Backend-Learnings#readme",
   "dependencies": {
+    "express": "^4.17.1",
+    "moment": "^2.24.0",
+    "mongodb": "^3.2.6",
     "parcel-bundler": "^1.12.3",
     "twit": "^2.2.11",
     "uuid": "^3.3.2"
