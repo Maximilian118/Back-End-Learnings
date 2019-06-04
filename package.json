@@ -6,6 +6,7 @@
   "scripts": {
     "node-server": "nodemon ./node/src-node/js/index",
     "express-server": "nodemon ./node/express/src-express/js/index",
+    "api-server": "nodemon ./node/api-node/server",
     "bundler": "parcel ./node/src-node/index.html",
     "twitbot": "node ./node/twitter-bot/twitter-bot",
     "twitbotstream": "node ./node/twitter-bot/twitter-bot-stream"
@@ -24,6 +25,8 @@
     "express": "^4.17.1",
     "moment": "^2.24.0",
     "mongodb": "^3.2.6",
+    "mongoose": "^5.5.12",
+    "morgan": "^1.9.1",
     "parcel-bundler": "^1.12.3",
     "twit": "^2.2.11",
     "uuid": "^3.3.2"
