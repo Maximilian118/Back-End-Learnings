@@ -1,20 +1,13 @@
-const Twit = require('twit');
+const twitter = require('./twit-auth');
 const readline = require('readline').createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
 console.log('Twitter Bot is starting...');
- 
-const T = new Twit({
-  consumer_key:         '6H9d4jjdWwfAKZY7APilrAKgU',
-  consumer_secret:      'ofyaI3I7giuBCEfO1RKmNObzDTbm9JRkSO4IDuDy9s8JrnTC0W',
-  access_token:         '60691528-DDHKAAFUeUG2kSfYrMQ9n1euuinJQkNKXVVJgc88M',
-  access_token_secret:  'Dmi0XQb1FCfdwxq6yLhRlynHge4APuflm52Ew34kT6qpD',
-});
 
 const post = (text) => {
-  T.post('statuses/update', {status: text}, err => {
+  twitter.post('statuses/update', {status: text}, err => {
     if (text == '') {
       return;
     } else if (err) {
@@ -30,7 +23,7 @@ const post = (text) => {
 };
 
 const get = (search, quantity) => {
-  T.get('search/tweets', {q: search, count: quantity}, (err, data) => {
+  twitter.get('search/tweets', {q: search, count: quantity}, (err, data) => {
     if (search == '') {
       return;
     } else if (quantity > 100) {
