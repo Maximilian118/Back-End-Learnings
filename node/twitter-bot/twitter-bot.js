@@ -33,9 +33,7 @@ const get = (search, quantity) => {
     } else {
       console.log('Searching Twitter...')
       const tweets = data.statuses;
-      for (let i = 0; i < tweets.length; i++) {
-        console.log(tweets[i].text);
-      };
+      tweets.forEach((tweet) => console.log(tweet.text))
     };
   });
 };

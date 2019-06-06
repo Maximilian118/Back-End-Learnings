@@ -4,3 +4,4 @@ node_modules
 dist
 
 /node/twitter-bot/twit-auth.js
+/node/api-node/max-cluster-key.js

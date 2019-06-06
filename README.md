@@ -6,8 +6,8 @@ Need to learn / goals:
 - [X] Become fluent with BASH / Linux.
 - [X] Middleware.
 - [X] Communication with databases.
-- [ ] How I might create the backend for a CRUD app.
-- [ ] Express.
+- [X] Create the backend for a CRUD app.
+- [X] Express.
 - [ ] Python.
-- [ ] Working with a VM / Ubuntu.
+- [X] Working with a VM / Ubuntu.
 

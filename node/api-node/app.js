@@ -5,8 +5,9 @@ const app = express();
 
 const productRouts = require('./api/routes/products');
 const orderRouts = require('./api/routes/orders');
+const cluster_PW = require('./max-cluster-key');
 
-mongoose.connect('mongodb+srv://Max:Maximos118@express-api-vxyav.mongodb.net/test?retryWrites=true&w=majority', { 
+mongoose.connect(`mongodb+srv://Max:${cluster_PW}@express-api-vxyav.mongodb.net/test?retryWrites=true&w=majority`, { 
   useNewUrlParser: true // connect to mongoDB
 });
 
