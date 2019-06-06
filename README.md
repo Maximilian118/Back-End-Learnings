@@ -2,10 +2,10 @@ A collection of files used to facilitate my learning of Backend languages and pr
 
 Need to learn / goals:
 
-- [ ] Node.js modules.
-- [ ] Become fluent with BASH / Linux.
-- [ ] Middleware.
-- [ ] Communication with databases.
+- [X] Node.js modules.
+- [X] Become fluent with BASH / Linux.
+- [X] Middleware.
+- [X] Communication with databases.
 - [ ] How I might create the backend for a CRUD app.
 - [ ] Express.
 - [ ] Python.
