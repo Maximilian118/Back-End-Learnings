@@ -21,7 +21,19 @@ router.post('/', (req, res, next) => {
     console.log(result);
     res.status(201).json({
       message: 'Handled POST request to /orders',
-      orderCreated: result
+      orderCreated: {
+        _id: result._id,
+        orderNum: result.orderNum,
+        user: result.user,
+        loggedIn: result.loggedIn,
+        productsInBasket: result.productsInBasket,
+        basketTotal: result.basketTotal,
+        paid: result.paid,
+        request: {
+          type: 'GET PATCH DELETE',
+          url: `http://localhost:4000/products/${result._id}`
+        }
+      }
     });
   })
   .catch(err => {
@@ -33,12 +45,30 @@ router.post('/', (req, res, next) => {
 // GET all orders
 router.get('/', (req, res, next) => {
   Order.find()
+  .select('_id orderNum user loggedIn productsInBasket basketTotal paid')
   .exec()
   .then(result => {
     if (result) {
-      console.log('Current orders:');
-      console.log(result);
-      res.status(200).json({result});
+      const response = {
+        count: result.length,
+        orders: result.map(obj => {
+          return {
+            _id: obj._id,
+            orderNum: obj.orderNum,
+            user: obj.user,
+            loggedIn: obj.loggedIn,
+            productsInBasket: obj.productsInBasket,
+            basketTotal: obj.basketTotal,
+            paid: obj.paid,
+            request: {
+              type: 'GET PATCH DELETE',
+              url: `http://localhost:4000/orders/${obj._id}`
+            }
+          }
+        })
+      };
+      console.log(response);
+      res.status(200).json({response});
     } else {
       console.log('No orders found yo');
       res.status(404).json({message: 'No orders found yo'})
@@ -54,12 +84,19 @@ router.get('/', (req, res, next) => {
 router.get('/:orderId', (req, res, next) => {
   const id = req.params.orderId;
   Order.findById(id)
+  .select('_id orderNum user loggedIn productsInBasket backsetTotal paid')
   .exec()
   .then(result => {
     if (result) {
-      console.log('Current orders:');
+      console.log('Order:');
       console.log(result);
-      res.status(200).json({result});
+      res.status(200).json({
+        order: result,
+        request: {
+          type: 'GET PATCH DELETE',
+          url: `http://localhost:4000/orders/${result._id}`
+        }
+      });
     } else {
       console.log('No order entry for that ID yo');
       res.status(404).json({message: 'No order entry for that ID yo'})
@@ -83,7 +120,13 @@ router.patch('/:orderId', (req, res, next) => {
   .then(result => {
     if (result) {
       console.log(`${id} has been updated to ${JSON.stringify(updateOps)}`);
-      res.status(200).json({message: `${id} has been updated to ${JSON.stringify(updateOps)}`});
+      res.status(200).json({
+        message: `${id} has been updated to ${JSON.stringify(updateOps)}`,
+        request: {
+          type: 'GET DELETE',
+          url: `http://localhost:4000/orders/${id}`
+        }
+      });
     } else {
       console.log('No order entry for that ID yo');
       res.status(404).json({message: 'No order entry for that ID yo'})
@@ -101,8 +144,22 @@ router.delete('/all', (req, res, next) => {
   .exec()
   .then(result => {
     if (result) {
-      console.log(`All orders deleted`);
-      res.status(200).json({message: `All orders deleted`});
+      console.log('All orders deleted');
+      res.status(200).json({
+        message: 'All orders deleted',
+        request: {
+          type: 'POST',
+          url: `http://localhost:4000/orders`,
+          body: {
+            orderNum: 'Number',
+            user: 'String',
+            loggedIn: 'Boolean',
+            productsInBasket: 'Number',
+            basketTotal: 'Number',
+            paid: 'Boolean'
+          }
+        }
+      });
     } else {
       console.log('No orders found yo');
       res.status(404).json({message: 'No orders found yo'})
@@ -122,7 +179,21 @@ router.delete('/:orderId', (req, res, next) => {
   .then(result => {
     if (result) {
       console.log(`Order ${id} was deleted`);
-      res.status(200).json({message: `Order ${id} was deleted`});
+      res.status(200).json({
+        message: `Order ${id} was deleted`,
+        request: {
+          type: 'POST',
+          url: `http://localhost:4000/orders`,
+          body: {
+            orderNum: 'Number',
+            user: 'String',
+            loggedIn: 'Boolean',
+            productsInBasket: 'Number',
+            basketTotal: 'Number',
+            paid: 'Boolean'
+          }
+        }
+      });
     } else {
       console.log('No order entry for that ID yo');
       res.status(404).json({message: 'No order entry for that ID yo'})

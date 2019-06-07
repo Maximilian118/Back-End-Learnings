@@ -12,7 +12,7 @@ mongoose.connect(`mongodb+srv://Max:${cluster_PW}@express-api-vxyav.mongodb.net/
 });
 
 app.use(morgan('dev')); // CLI Logger
-
+app.use('/uploads', express.static('node/api-node/uploads'));
 app.use(express.urlencoded({extended: true}));  // body-parser
 app.use(express.json());
 
