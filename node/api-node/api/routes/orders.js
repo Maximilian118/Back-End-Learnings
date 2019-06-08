@@ -3,9 +3,10 @@ const router = express.Router();
 const mongoose = require('mongoose');
 
 const Order = require('../models/order-schema');
+const checkAuth = require('../auth/check-auth');
 
 // POST order
-router.post('/', (req, res, next) => {
+router.post('/', checkAuth, (req, res, next) => {
   const order = new Order({
     _id: new mongoose.Types.ObjectId(),
     orderNum: req.body.orderNum,
@@ -43,7 +44,7 @@ router.post('/', (req, res, next) => {
 });
 
 // GET all orders
-router.get('/', (req, res, next) => {
+router.get('/', checkAuth, (req, res, next) => {
   Order.find()
   .select('_id orderNum user loggedIn productsInBasket basketTotal paid')
   .exec()
@@ -81,7 +82,7 @@ router.get('/', (req, res, next) => {
 })
 
 // GET order by ID
-router.get('/:orderId', (req, res, next) => {
+router.get('/:orderId', checkAuth, (req, res, next) => {
   const id = req.params.orderId;
   Order.findById(id)
   .select('_id orderNum user loggedIn productsInBasket backsetTotal paid')
@@ -109,7 +110,7 @@ router.get('/:orderId', (req, res, next) => {
 });
 
 // PATCH an order
-router.patch('/:orderId', (req, res, next) => {
+router.patch('/:orderId', checkAuth, (req, res, next) => {
   const id = req.params.orderId;
   const updateOps = {};
   for (const ops of req.body) {
@@ -139,7 +140,7 @@ router.patch('/:orderId', (req, res, next) => {
 });
 
 // DELETE all orders
-router.delete('/all', (req, res, next) => {
+router.delete('/all', checkAuth, (req, res, next) => {
   Order.deleteMany()
   .exec()
   .then(result => {
@@ -172,7 +173,7 @@ router.delete('/all', (req, res, next) => {
 });
 
 // DELETE order by ID
-router.delete('/:orderId', (req, res, next) => {
+router.delete('/:orderId', checkAuth, (req, res, next) => {
   const id = req.params.orderId;
   Order.deleteOne({_id: id})
   .exec()

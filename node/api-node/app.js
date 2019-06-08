@@ -5,17 +5,19 @@ const app = express();
 
 const productRouts = require('./api/routes/products');
 const orderRouts = require('./api/routes/orders');
-const cluster_PW = require('./max-cluster-key');
+const userRouts = require('./api/routes/users');
 
-mongoose.connect(`mongodb+srv://Max:${cluster_PW}@express-api-vxyav.mongodb.net/test?retryWrites=true&w=majority`, { 
-  useNewUrlParser: true // connect to mongoDB
+// connect to mongoDB
+mongoose.connect("mongodb+srv://Max:" + process.env.Max_PW + "@express-api-vxyav.mongodb.net/test?retryWrites=true&w=majority", { 
+  useNewUrlParser: true, useCreateIndex: true
 });
 
 app.use(morgan('dev')); // CLI Logger
-app.use('/uploads', express.static('node/api-node/uploads'));
+app.use('/uploads', express.static('node/api-node/uploads')); // file paths
 app.use(express.urlencoded({extended: true}));  // body-parser
 app.use(express.json());
 
+// CORS error management 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', '*');
@@ -26,22 +28,23 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/products', productRouts); // Routs
+// Routs
+app.use('/products', productRouts);
 app.use('/orders', orderRouts);
+app.use('/users', userRouts);
 
-app.use((req, res, next) => { // Error filters
-  const err = new Error('Not found');
+// Error filters
+app.use((req, res, next) => {
+  const err = new Error('Non existent URL');
   err.status = 404;
   next(err);
 });
 
 app.use((err, req, res, next) => { 
   res.status(err.status || 500);
-  res.json({
-    error: {
-      message: err.message
-    }
-  });
+  res.json({error: {message: err.message}});
+  console.log(err.message);
 });
 
-module.exports = app; // Export to Server
+// Export to Server
+module.exports = app;

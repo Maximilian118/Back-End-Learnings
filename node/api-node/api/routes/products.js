@@ -3,6 +3,9 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const multer = require('multer');
 
+const Product = require('../models/product-schema');
+const checkAuth = require('../auth/check-auth');
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {cb(null, './node/api-node/uploads')},
   filename: (req, file, cb) => {cb(null, file.originalname)}
@@ -25,10 +28,8 @@ const upload = multer({
   fileFilter: fileFilter
 });
 
-const Product = require('../models/product-schema');
-
 // POST a product
-router.post('/', upload.single('file'), (req, res, next) => {
+router.post('/', checkAuth, upload.single('file'), (req, res, next) => {
   const product = new Product({
     _id: new mongoose.Types.ObjectId(),
     productName: req.body.productName,
@@ -133,7 +134,7 @@ router.get('/:productId', (req, res, next) => {
 });
 
 // PATCH / update a product
-router.patch('/:productId', (req, res, next) => {
+router.patch('/:productId', checkAuth, (req, res, next) => {
   const id = req.params.productId;
   const updateOps = {};
   for (const ops of req.body) {
@@ -163,7 +164,7 @@ router.patch('/:productId', (req, res, next) => {
 });
 
 // DELETE all products
-router.delete('/all', (req, res, next) => {
+router.delete('/all', checkAuth, (req, res, next) => {
   Product.deleteMany()
   .exec()
   .then(result => {
@@ -193,7 +194,7 @@ router.delete('/all', (req, res, next) => {
 });
 
 // DELETE product bt ID
-router.delete('/:productId', (req, res, next) => {
+router.delete('/:productId', checkAuth, (req, res, next) => {
   const id = req.params.productId;
   Product.deleteOne({_id: id})
   .exec()
