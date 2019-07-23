@@ -1,6 +1,7 @@
 {
   "env": {
-    "Max_PW": "Maximos118",
-    "JWT_KEY": "samisgay"
+    "MONGO_USER": "Max",
+    "MONGO_PASS": "ADworMOKvMinQTVk",
+    "MONGO_DB": "events-grapgql-stuff"
   }
 }
