@@ -1,5 +1,14 @@
 const Event = require('../../../models/event-schema')
 const User = require('../../../models/user-schema')
+const DataLoader = require('dataloader')
+
+const eventLoader = new DataLoader(eventIds => {
+  return events(eventIds)
+})
+
+const userLoader = new DataLoader(userIds => {
+  return User.find({ _id: { $in: userIds } })
+})
 
 const dateToString = date => new Date(date).toISOString()
 
@@ -14,17 +23,17 @@ const events = async eventIds => { // Fetch an event by _id
 
 const singleEvent = async eventId => {
   try {
-    const event = await Event.findById(eventId)
-    return returnWithCreator(event)
+    const event = await eventLoader.load(eventId)
+    return event
   } catch (err) { throw err }
 }
 
 const user = async userId => { // Fetch a user by _id
   try {
-    const user = await User.findById(userId)
+    const user = await userLoader.load(userId.toString())
     return {
       ...user._doc,
-      createdEvents: events.bind(this, user._doc.createdEvents)
+      createdEvents: () => eventLoader.loadMany(user._doc.createdEvents)
     }
   } catch (err) { throw err }
 }
@@ -32,7 +41,7 @@ const user = async userId => { // Fetch a user by _id
 const returnWithCreator = event => {
   return {
     ...event._doc,
-    creator: user.bind(this, event._doc.creator)
+    creator: user.bind(this, event.creator)
   }
 }
 

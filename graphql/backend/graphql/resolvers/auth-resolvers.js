@@ -16,7 +16,20 @@ module.exports = {
       })
       const res = await user.save()
       console.log(`[app.js] createUser... \n ${res}`)
-      return { ...res._doc, password: null }
+
+      const newUser = await User.findOne({ email: args.userInput.email })
+      const token = jwt.sign({ userId: newUser._id, email: newUser.email }, 'somesupersecretkey', {
+        expiresIn: '1h'
+      })
+
+      return {
+        ...res._doc,
+        password: null,
+        userId: newUser._id,
+        token: token,
+        tokenExpiration: 1,
+        userEmail: newUser.email
+      }
     } catch (err) { throw err }
   },
   login: async args => {
@@ -28,13 +41,14 @@ module.exports = {
     if (!isEqual) {
       throw new Error("Wrong Password!")
     }
-    const token = jwt.sign({ userId: user.id.email, email: user.email }, 'somesupersecretkey', {
+    const token = jwt.sign({ userId: user._id, email: user.email }, 'somesupersecretkey', {
       expiresIn: '1h'
     })
     return {
-      userId: user.id,
+      userId: user._id,
       token: token,
-      tokenExpiration: 1
+      tokenExpiration: 1,
+      userEmail: user.email
     }
   }
 }

@@ -21,6 +21,10 @@ module.exports = buildSchema(`
   type User {
     _id: ID!
     email: String!
+    userId: ID!
+    token: String!
+    tokenExpiration: Int!
+    userEmail: String!
     password: String
     createdEvents: [Event!]
   }
@@ -29,6 +33,7 @@ module.exports = buildSchema(`
     userId: ID!
     token: String!
     tokenExpiration: Int!
+    userEmail: String!
   }
 
   input UserInput {

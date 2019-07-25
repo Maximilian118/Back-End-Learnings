@@ -40,6 +40,7 @@ Node.JS / Express Learning Points:
 
 General Learning Points:
 
+- [X] Testing HTTP Requests with Postman.
 - [X] BASH / Linux.
 - [X] Middleware.
 - [X] Communication with Databases.
@@ -50,6 +51,8 @@ General Learning Points:
 Dependencies:
 -  "bcrypt": "^3.0.6", // To allow hashing of data. (native C++)
 -  "bcryptjs": "^2.4.3", // Pure JS version of bcrypt. Slower but less hassle.
+-  "concurrently": "^4.1.1", // Run multiple servers at the same time.
+-  "dataloader": "^1.4.0", // Batch Graphql requests.
 -  "express": "^4.17.1", // Node.js framework.
 -  "express-graphql": "^0.9.0", // Use Graphql Schemas with Express.
 -  "graphql": "^14.4.2", // Create Graphql Schemas.

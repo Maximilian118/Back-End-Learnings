@@ -1,0 +1,36 @@
+.bookings__list_item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+  padding: 10px 15px;
+  background: #444;
+  border: 1px solid orange;
+  height: 60px;
+
+  .col {
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    h3 {
+      margin: 0;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .row {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      p {
+        margin: 0 10px 0 0;
+      }
+    }
+  }
+}

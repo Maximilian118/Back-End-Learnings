@@ -26,12 +26,13 @@ module.exports = {
     try {
       const res = await event.save()
       console.log(`[app.js] createEvent... \n ${res}`)
-      const userId = await User.findById(req.userId)
-      if (!userId) {
+      const creator = await User.findById(req.userId)
+      console.log(creator)
+      if (!creator) {
         throw new Error('User not found')
       }
-      userId.createdEvents.push(event)
-      await userId.save()
+      creator.createdEvents.push(event)
+      await creator.save()
       return returnWithCreator(res)
     } catch (err) { throw err }
   }

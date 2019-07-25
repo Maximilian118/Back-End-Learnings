@@ -1,0 +1,61 @@
+.Header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3.5rem;
+  background: orange;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+
+  .Nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    a {
+      transition: 0.3s;
+      text-decoration: none;
+      color: black;
+      font-size: 1.3em;
+
+      &:hover {
+        transition: 0.3s;
+        color: darkorange;
+      }
+    }
+
+    h3 {
+      margin-right: 40px;
+    }
+    
+    ul {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        margin-right: 20px;
+
+        a {
+          transition: 0.3s;
+          text-decoration: none;
+          color: black;
+          font-size: 1.3em;
+
+          &:hover {
+            transition: 0.3s;
+            color: darkorange;
+          }
+        }
+      } 
+    }
+  }
+}

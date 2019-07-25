@@ -7,7 +7,9 @@
     "node-server": "nodemon ./node/src-node/js/index",
     "express-server": "nodemon ./node/express/src-express/js/index",
     "api-server": "nodemon ./node/api-node/server",
-    "graphql-server": "nodemon ./graphql/app",
+    "graphql-backend": "nodemon ./graphql/backend/app.js",
+    "graphql-frontend": "npm run start --prefix ./graphql/frontend",
+    "graphql-dev": "concurrently \"npm run graphql-backend\" \"npm run graphql-frontend\"",
     "bundler": "parcel ./node/src-node/index.html",
     "twitbot": "node ./node/twitter-bot/twitter-bot",
     "twitbotstream": "node ./node/twitter-bot/twitter-bot-stream"
@@ -25,6 +27,8 @@
   "dependencies": {
     "bcrypt": "^3.0.6",
     "bcryptjs": "^2.4.3",
+    "concurrently": "^4.1.1",
+    "dataloader": "^1.4.0",
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
     "graphql": "^14.4.2",
